@@ -2,24 +2,48 @@
 <html>
   <head>
     <title><%= title %></title>
-<link rel='stylesheet' href='/css/style.css' />
+<link rel="stylesheet" href="/css/style.css" />
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/p5.js"></script>
+-->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/p5.min.js"></script>
 
   </head>
-  <body>
-    <table style="width:500px">
+<body>
+
+  <table id="buttons">
+    <tr  style="border: 0;">
+      <td style="border: 0;"><button onClick="scaleBox('+')" id="plus">+</button></td>
+      <td style="border: 0;"><button onClick="scaleBox('-')" id="minus">-</button></td>
+    </tr>
+    </table>
+    <table id="countBox">
       <tr>
-        <th>Bar</th>
-        <th>Beat</th>
-        <th>BPM</th>
+        <td>Bar</td>
+	<td id="value_1">0</td>
       </tr>
       <tr>
-        <td id="value_1">0</td>
-        <td id="value_2">0</td>
-        <td id="value_3">0</td>
+        <td>Beat</td>
+	<td id="value_2">0</td>
+      </tr>
+      <tr>
+        <td>BPM</td>
+	<td id="value_3">0</td>
+      </tr>
+      <tr>
+        <td>Time Sig</td>
+	<td id="value_4">4 4</td>
+      </tr>
+      <tr>
+	<td id="instruction" colspan=2
+	  style="font-style:italic; font-weight: bold; text-align: left;">
+	  Get ready!</td>
       </tr>
     </table>
-    <div id="ball"><span></span></div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
-    <script src="/js/danSockets.js"></script>
+<script src="/js/danSockets.js"></script>
+<script src="/js/danp5.js"></script>
+
   </body>
 </html>

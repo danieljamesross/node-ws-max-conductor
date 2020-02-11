@@ -71,22 +71,23 @@ wss.on("connection", function connection(ws, req) {
 	ws.terminate();
     });
     
-    const sender = function (a, b, c, d, e, f) {
+    const sender = function (a, b, c, d, e, f, g) {
 	ws.send(JSON.stringify({
 	    "value_1": a,
 	    "value_2": b,
 	    "value_3": c,
 	    "value_4": d,
 	    "value_5": e,
-	    "value_6": f
+	    "value_6": f,
+	    "value_7": g
 	}));
     };
     
     // Handle the Max interactions here...
     Max.addHandler("send", (...args) => {
 	console.log("send args: " + args);
-	if (args.length === 6) {
-	    sender(args[0], args[1], args[2], args[3], args[4], args[5]);  
+	if (args.length === 7) {
+	    sender(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);  
 	}
     });
 });
