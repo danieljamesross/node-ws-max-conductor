@@ -2,6 +2,12 @@ h1 {
     font: 1em "Lucida Grande", Helvetica, Arial, sans-serif;
     text-align: center;
 }
+
+h1 {
+    font: 12pt "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-align: left;
+}
+
 html, body {
     height: 100%;
 }

@@ -17,7 +17,11 @@ const Max = require("max-api");
 
 var index = require("./routes/index");
 var app = express();
-
+/*
+function arrived (arg) {
+    theBeat = arg;
+}
+*/
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -59,7 +63,6 @@ let server = http.createServer(app);
 const wss = new WebSocket.Server({ port: 7474 });
 
 wss.on("connection", function connection(ws, req) {
-    
     ws.on("message", function incoming(message) {
 	console.log("received: %s", message);
     });
