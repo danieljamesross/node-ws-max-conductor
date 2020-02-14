@@ -20,14 +20,15 @@ function convertRange( value, r1, r2 ) {
 function setStp (tmp) {
     var outStp;
     if (tmp >= 300) {
-	outStp = 0.5;
+	outStp = 0.4;
     }
     else if (tmp <= 30) {
 	outStp = 0.08;
     }
     else {
-	convertRange(tmp, [ 30, 300 ], [ 0.08, 0.4 ]);
+	outStp = convertRange(tmp, [ 30, 300 ], [ 0.08, 0.4 ]);
     }
+    return outStp;
 }
 
 
@@ -52,6 +53,7 @@ exampleSocket.onmessage = function (event) {
     var lastY = 0;
     var expt = 4;
     var stp = setStp(tempo);
+    //stp = convertRange(tmp, [ 30, 300 ], [ 0.08, 0.4 ]);
     if (beat != lastBeat) {
 	oc.stop();
 	if (beat != 1) {
