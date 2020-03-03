@@ -4,7 +4,7 @@
 // to perform its thing...
 // --------------------------------------------------------------------------
 /* global $ */
-var exampleSocket = new WebSocket("ws://192.168.0.11:7474");
+var exampleSocket = new WebSocket("ws://localhost:7474");
 var oc = $("#ball");
 var barBox = $("#value_1");
 var beatBox = $("#value_2");
