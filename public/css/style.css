@@ -13,6 +13,7 @@ html, body {
 }
 body {
     font: 5em "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: white;
     margin: 0;
     display: flex;
     /* This centers our sketch horizontally. */
@@ -23,28 +24,21 @@ body {
 
 #countBox {
     position: absolute;
-    top: 5%;
-    left: 5%;
+    top: 8%;
+    left: 1%;
     text-align: right;
     table-layout: fixed;
-    width: 300px;
-}
-
-table {
+    width: 220px;
 }
 
 th, tr, td {
-    border: 2px solid black;
+    border: 0px;
     width: auto; /*100px;*/
     margin: 0px;
     padding: 0px 10px;
-    font: 0.6em "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 0.5em "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-#buttons {
-    position: absolute;
-    top: 90%;
-    left: 5%;
-    text-align: center;
-    vertical-align: middle;
+button {
+    font-size: 0.3em;
 }

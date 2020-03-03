@@ -17,11 +17,7 @@ const Max = require("max-api");
 
 var index = require("./routes/index");
 var app = express();
-/*
-function arrived (arg) {
-    theBeat = arg;
-}
-*/
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

@@ -4,7 +4,7 @@
 // to perform its thing...
 // --------------------------------------------------------------------------
 /* global $ */
-var exampleSocket = new WebSocket("ws://localhost:7474");
+var exampleSocket = new WebSocket("ws://192.168.0.11:7474");
 var oc = $("#ball");
 var barBox = $("#value_1");
 var beatBox = $("#value_2");
@@ -12,6 +12,8 @@ var tempoBox = $("#value_3");
 var instructionBox = $("#instruction");
 var tSBox = $("#value_4");
 var theBeat = "yes";
+var lastBeat = 0;
+var color = 'red';
 
 function convertRange( value, r1, r2 ) { 
     return ( value - r1[ 0 ] ) * ( r2[ 1 ] - r2[ 0 ] ) / ( r1[ 1 ] - r1[ 0 ] ) + r2[ 0 ];
@@ -40,10 +42,8 @@ exampleSocket.onopen = function (event) {
 
 exampleSocket.onmessage = function (event) {
     let e = JSON.parse(event.data);
-    // console.log(e.value_1);
     var bar = e.value_1;
     var beat = e.value_2;
-    var lastBeat = 0;
     var tempo = e.value_3;
     var instruction = e.value_6;
     var timeSig = e.value_7;
@@ -53,7 +53,6 @@ exampleSocket.onmessage = function (event) {
     var lastY = 0;
     var expt = 4;
     var stp = setStp(tempo);
-    //stp = convertRange(tmp, [ 30, 300 ], [ 0.08, 0.4 ]);
     if (beat != lastBeat) {
 	oc.stop();
 	if (beat != 1) {
@@ -62,21 +61,35 @@ exampleSocket.onmessage = function (event) {
 	else {
 	    expt = 1;
 	}
+	switch (beat) {
+	case 1:
+	    color = 'rgb(0,128,0)'; //green
+	    break;
+	case 2:
+	    color = 'rgb(30,144,255)'; //blue
+	    break;
+	case 3:
+	    color = 'rgb(255,215,0)';//yellow
+	    break;
+	case 4:
+	    color = 'rgb(255,69,0)';//red
+	}
 
-	conduct(maxX, maxY, expt, stp);
+	conduct(maxX, maxY, expt, stp, color);
 	metronome(beat);
-	lastBeat = beat;
-	lastX = maxX;
-	lastY = maxY;
-	barBox.text(bar);
-	beatBox.text(beat);
-	tempoBox.text(tempo);
-	instructionBox.text(instruction);
-	tSBox.text(timeSig);
-	//send back to Max
-	exampleSocket.send(theBeat);
     }
-
+    lastBeat = beat;
+    lastX = maxX;
+    lastY = maxY;
+    barBox.text(bar);
+    beatBox.text(beat);
+    tempoBox.text(tempo);
+    instructionBox.text(instruction);
+    tSBox.text(timeSig);
+    
+   
+    //send back to Max
+    exampleSocket.send(theBeat);
     
 };
 

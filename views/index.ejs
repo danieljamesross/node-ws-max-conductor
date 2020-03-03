@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
+<head>
+<title><%= title %></title>
 <link rel="stylesheet" href="/css/style.css" />
 <!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -11,40 +11,33 @@
 <script src="/js/p5.min.js"></script>
 <script src="/js/p5.sound.min.js"></script>
 
-  </head>
+</head>
 <body>
-
-  <table id="buttons">
-    <tr  style="border: 0;">
-      <td style="border: 0;"><button onClick="scaleBox('+')" id="plus">+</button></td>
-      <td style="border: 0;"><button onClick="scaleBox('-')" id="minus">-</button></td>
+<table id="countBox">
+  <tr>
+    <td style="text-align: left;">Bar</td>
+    <td id="value_1">0</td>
+  </tr>
+  <tr>
+    <td style="text-align: left;">Beat</td>
+    <td id="value_2">0</td>
+  </tr>
+  <tr>
+    <td style="text-align: left;">BPM</td>
+    <td id="value_3">0</td>
+  </tr>
+  <tr>
+    <td style="text-align: left;">Time Sig</td>
+    <td id="value_4">4 4</td>
+  </tr>
+  <tr>
+    <td id="instruction" colspan="2"
+      style="font-style:italic; font-weight: bold; text-align: left;">
+      Get ready!</td>
     </tr>
-    </table>
-    <table id="countBox">
-      <tr>
-        <td>Bar</td>
-	<td id="value_1">0</td>
-      </tr>
-      <tr>
-        <td>Beat</td>
-	<td id="value_2">0</td>
-      </tr>
-      <tr>
-        <td>BPM</td>
-	<td id="value_3">0</td>
-      </tr>
-      <tr>
-        <td>Time Sig</td>
-	<td id="value_4">4 4</td>
-      </tr>
-      <tr>
-	<td id="instruction" colspan=2
-	  style="font-style:italic; font-weight: bold; text-align: left;">
-	  Get ready!</td>
-      </tr>
-    </table>
-<script src="/js/danSockets.js"></script>
-    <script src="/js/danp5.js"></script>
-
+  </table>
+  <script src="/js/danSockets.js"></script>
+  <script src="/js/danp5.js"></script>
+  
   </body>
-</html>
+  </html>
