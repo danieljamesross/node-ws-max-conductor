@@ -34,20 +34,20 @@ app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-	var err = new Error("Not Found");
-	err.status = 404;
-	next(err);
+		var err = new Error("Not Found");
+		err.status = 404;
+		next(err);
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get("env") === "development" ? err : {};
-
-	// render the error page
-	res.status(err.status || 500);
-	res.render("error");
+		// set locals, only providing error in development
+		res.locals.message = err.message;
+		res.locals.error = req.app.get("env") === "development" ? err : {};
+		
+		// render the error page
+		res.status(err.status || 500);
+		res.render("error");
 });
 
 // handle the web socket server here (using the ws package...)
@@ -60,41 +60,45 @@ const wss = new WebSocket.Server({ port: 7474 });
 
 wss.on("connection", function connection(ws, req) {
     ws.on("message", function incoming(message) {
-	console.log("received: %s", message);
+				//console.log("received: %s", message);
     });
-    
+    console.log(req);
     ws.on("close", function stop() {
-	Max.removeHandlers("send");
-	console.log("Connection closed");
-	
-	ws.terminate();
+				Max.removeHandlers("send");
+				console.log("Connection closed");
+				ws.terminate();
     });
-    
+		
+    // Handle any error that occurs.
+		ws.onerror = function(error) {
+				console.log('WebSocket Error: ' + error);
+		};
+
     const sender = function (a, b, c, d, e, f, g) {
-	ws.send(JSON.stringify({
-	    "value_1": a,
-	    "value_2": b,
-	    "value_3": c,
-	    "value_4": d,
-	    "value_5": e,
-	    "value_6": f,
-	    "value_7": g
-	}));
+				ws.send(JSON.stringify({
+						"value_1": a,
+						"value_2": b,
+						"value_3": c,
+						"value_4": d,
+						"value_5": e,
+						"value_6": f,
+						"value_7": g
+				}));
     };
     
     // Handle the Max interactions here...
     Max.addHandler("send", (...args) => {
-	console.log("send args: " + args);
-	if (args.length === 7) {
-	    sender(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);  
-	}
+				console.log("send args: " + args);
+				if (args.length === 7) {
+						sender(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);  
+				}
     });
 });
 
 Max.addHandler(Max.MESSAGE_TYPES.ALL, (handled, ...args) => {
     if (!handled) {
-	// Max.post('No client connected.')
-	// just consume the message
+				// Max.post('No client connected.')
+				// just consume the message
     }
 });
 

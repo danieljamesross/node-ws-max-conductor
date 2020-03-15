@@ -22,13 +22,13 @@ function convertRange( value, r1, r2 ) {
 function setStp (tmp) {
     var outStp;
     if (tmp >= 300) {
-	outStp = 0.4;
+				outStp = 0.4;
     }
     else if (tmp <= 30) {
-	outStp = 0.08;
+				outStp = 0.08;
     }
     else {
-	outStp = convertRange(tmp, [ 30, 300 ], [ 0.08, 0.4 ]);
+				outStp = convertRange(tmp, [ 30, 300 ], [ 0.08, 0.4 ]);
     }
     return outStp;
 }
@@ -36,8 +36,8 @@ function setStp (tmp) {
 
 
 exampleSocket.onopen = function (event) {
-	console.log("sending data...");
-	exampleSocket.send("Ready, willing and able!");
+		console.log("sending data...");
+		exampleSocket.send("Ready, willing and able!");
 };
 
 exampleSocket.onmessage = function (event) {
@@ -54,29 +54,29 @@ exampleSocket.onmessage = function (event) {
     var expt = 4;
     var stp = setStp(tempo);
     if (beat != lastBeat) {
-	oc.stop();
-	if (beat != 1) {
-	    expt = 3;
-	}
-	else {
-	    expt = 1;
-	}
-	switch (beat) {
-	case 1:
-	    color = 'rgb(0,128,0)'; //green
-	    break;
-	case 2:
-	    color = 'rgb(30,144,255)'; //blue
-	    break;
-	case 3:
-	    color = 'rgb(255,215,0)';//yellow
-	    break;
-	case 4:
-	    color = 'rgb(255,69,0)';//red
-	}
-
-	conduct(maxX, maxY, expt, stp, color);
-	metronome(beat);
+				oc.stop();
+				if (beat != 1) {
+						expt = 3;
+				}
+				else {
+						expt = 1;
+				}
+				switch (beat) {
+				case 1:
+						color = 'rgb(0,128,0)'; //green
+						break;
+				case 2:
+						color = 'rgb(30,144,255)'; //blue
+						break;
+				case 3:
+						color = 'rgb(255,215,0)'; //yellow
+						break;
+				case 4:
+						color = 'rgb(255,69,0)'; //red
+				}
+				
+				conduct(maxX, maxY, expt, stp, color);
+				metronome(beat);
     }
     lastBeat = beat;
     lastX = maxX;
@@ -97,5 +97,10 @@ exampleSocket.onmessage = function (event) {
 // Managing the interaction
 
 $(window).on("beforeunload", function () {
-	exampleSocket.close();
+		exampleSocket.close();
 });
+
+// Do necessary clean up.
+exampleSocket.onclose = function(event) {
+		console.log('Disconnected from WebSocket.');
+};

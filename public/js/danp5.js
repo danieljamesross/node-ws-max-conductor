@@ -16,12 +16,16 @@ let metronomeState = 0;
 let metronomeDisplay = 'Metronome';
 let metronomePitch = "C5";
 let newcolor = 'rgb(255,69,0)';
-var button;
+var metButton;
+var incButton;
+var decButton;
 
 
 function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
-    button = createButton('Metronome');
+    metButton = createButton('Metronome');
+		incButton = createButton('+');
+		decButton = createButton('-');
     cnv.style('display', 'block');
     noStroke();
     distX = endX - beginX;
@@ -30,13 +34,35 @@ function setup() {
 
     monoSynth = new p5.MonoSynth();
     monoSynth.setADSR(0.1, 0.005, 0.1, 0.05);
-    button.style('background-color', 'rgb(255,69,0)');
-    button.style('color', 'white');
-    button.style('border', '0px');
-    button.style('padding', '5px');
-    button.position(19, (windowHeight * 0.5));
-    button.touchStarted(metronomeOnOff);
-    button.mousePressed(metronomeOnOff);
+		
+    metButton.style('background-color', 'rgb(255,69,0)');
+    metButton.style('color', 'white');
+    metButton.style('border', '0px');
+    metButton.style('padding', '5px');
+    metButton.position(19, (windowHeight * 0.5));
+    metButton.touchStarted(metronomeOnOff);
+    metButton.mousePressed(metronomeOnOff);
+		
+		incButton.style('background-color', 'rgb(255,69,0)');
+    incButton.style('color', 'white');
+    incButton.style('border', '0px');
+    incButton.style('padding', '5px');
+		incButton.style('width', '30px');
+    incButton.position(19, (windowHeight * 0.75));
+	//	incButton.click(mouseX, mouseY);
+//    incButton.touchStarted(incDiameter);
+ //   incButton.mousePressed(incDiameter);
+//		incButton.mouseReleased('background-color', 'rgb(255,69,0)');
+		
+		decButton.style('background-color', 'rgb(255,69,0)');
+    decButton.style('color', 'white');
+    decButton.style('border', '0px');
+    decButton.style('padding', '5px');
+		decButton.style('width', '30px');
+    decButton.position(59, (windowHeight * 0.75));
+  //  decButton.touchStarted(decDiameter);
+ //   decButton.mousePressed(decDiameter);
+//		decButton.mouseReleased('background-color', 'rgb(255,69,0)');
 
 }
 
@@ -49,33 +75,33 @@ function draw() {
     rect(0, 0, width, height);
     pct += step;
     if (pct < 1.0) {
-	x = beginX + pct * distX;
-	y = beginY + pow(pct, exponent) * distY;
+				x = beginX + pct * distX;
+				y = beginY + pow(pct, exponent) * distY;
     }
     fill(newcolor);
     ellipse(x, y, diameter, diameter);
-//    for (i = 1; i<10; i++) {
-//	fill(30, 70);
-//	ellipse(x + (i * 2), y + (i * 2), (diameter - (i * 2)), (diameter - (i * 2)));
-//    }
+		//    for (i = 1; i<10; i++) {
+		//	fill(30, 70);
+		//	ellipse(x + (i * 2), y + (i * 2), (diameter - (i * 2)), (diameter - (i * 2)));
+		//    }
     // when pct = 1.0 send message back to Max
     if (pct >= 0.999) {
-	theBeat = 1;
+				theBeat = 1;
     }
     else {
-	theBeat = 0;
+				theBeat = 0;
     }
 }
 
 function metronome (beat) {
     if (metronomeState == 1) {
-	if (beat != 1) {
-	    metronomePitch = "G5";
-	}
-	else {
-	    metronomePitch = "C6";
-	}
-	monoSynth.play(metronomePitch, 1, 0, 0.2);
+				if (beat != 1) {
+						metronomePitch = "G5";
+				}
+				else {
+						metronomePitch = "C6";
+				}
+				monoSynth.play(metronomePitch, 1, 0, 0.2);
     }
 }
 
@@ -94,13 +120,27 @@ function conduct(maxX, maxY, expt, stp, color) {
 
 function metronomeOnOff () {
     if (metronomeState == 0) {
-	metronomeState = 1;
-	button.style('background-color', 'rgb(0,128,0)');
+				metronomeState = 1;
+				metButton.style('background-color', 'rgb(0,128,0)');
     }
     else {
-	metronomeState = 0;
-	button.style('background-color', 'rgb(255,69,0)');
+				metronomeState = 0;
+				metButton.style('background-color', 'rgb(255,69,0)');
     }
 }
 
+function incDiameter() {
 
+		diameterChange(1);
+		incButton.style('background-color', 'rgb(0,128,0)');
+}
+
+function decDiameter() {
+		diameterChange(-1);
+		decButton.style('background-color', 'rgb(0,128,0)');
+}
+
+
+function diameterChange(amt) {
+		diameter = diameter + amt;
+}
